@@ -41,7 +41,6 @@
         <!--Workouts-->
         <scene sceneID="sDO-NR-ekc">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="omE-fV-zH4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="fRM-Sb-ned" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m05-qi-Czl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -70,6 +69,7 @@
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="omE-fV-zH4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4031.1999999999998" y="-1143.7781109445277"/>
         </scene>
@@ -112,7 +112,7 @@
         <!--New Song-->
         <scene sceneID="Fes-6I-FXx">
             <objects>
-                <viewController title="New Song" id="4bq-Zm-9DV" sceneMemberID="viewController">
+                <viewController title="New Song" id="4bq-Zm-9DV" customClass="NewSongViewController" customModule="Cycle_Trac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gyg-BL-y8c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -153,6 +153,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MnC-4b-zv5"/>
                     </view>
+                    <connections>
+                        <outlet property="songDescriptionTextView" destination="7P6-MV-qay" id="Iat-4C-nfG"/>
+                        <outlet property="songDurationPickerView" destination="uGM-19-3s2" id="De1-kA-ac8"/>
+                        <outlet property="songTitleTextField" destination="GwG-x7-TQr" id="rk0-71-qHR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B2Z-sq-vql" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -161,7 +166,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="bVE-kv-yDh">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="quu-Ip-lKY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="LbX-53-BLM" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cds-oF-0nT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -173,6 +177,7 @@
                         <segue destination="UgM-a8-gls" kind="relationship" relationship="viewControllers" id="3dx-FV-AOo"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="quu-Ip-lKY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1613" y="-736"/>
         </scene>

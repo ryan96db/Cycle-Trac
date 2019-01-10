@@ -12,6 +12,7 @@
 		3A3D845321BDB8950074AD2D /* Cycle_Trac.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D845121BDB8950074AD2D /* Cycle_Trac.xcdatamodeld */; };
 		3A3D845521BDB89D0074AD2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A3D845421BDB89D0074AD2D /* Assets.xcassets */; };
 		3A3D845821BDB89D0074AD2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A3D845621BDB89D0074AD2D /* LaunchScreen.storyboard */; };
+		3A42855921E705860096CAD0 /* NewSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A42855821E705860096CAD0 /* NewSongViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		3A3D845421BDB89D0074AD2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A3D845721BDB89D0074AD2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A3D845921BDB89D0074AD2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A42855821E705860096CAD0 /* NewSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSongViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				3A3D844A21BDB8940074AD2D /* AppDelegate.swift */,
 				3A3D844E21BDB8950074AD2D /* Main.storyboard */,
+				3A42855821E705860096CAD0 /* NewSongViewController.swift */,
 				3A3D845421BDB89D0074AD2D /* Assets.xcassets */,
 				3A3D845621BDB89D0074AD2D /* LaunchScreen.storyboard */,
 				3A3D845921BDB89D0074AD2D /* Info.plist */,
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A3D844B21BDB8940074AD2D /* AppDelegate.swift in Sources */,
+				3A42855921E705860096CAD0 /* NewSongViewController.swift in Sources */,
 				3A3D845321BDB8950074AD2D /* Cycle_Trac.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
