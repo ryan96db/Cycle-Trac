@@ -41,7 +41,7 @@
         <!--Workouts-->
         <scene sceneID="sDO-NR-ekc">
             <objects>
-                <viewController id="fRM-Sb-ned" sceneMemberID="viewController">
+                <viewController id="fRM-Sb-ned" customClass="RecentWorkoutsViewController" customModule="Cycle_Trac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m05-qi-Czl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,10 +64,14 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="ZWk-Rd-j6i"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="eGi-4b-4AV">
                             <connections>
-                                <segue destination="Itx-td-Bvb" kind="show" id="kIG-tQ-zZA"/>
+                                <action selector="addNewWorkout:" destination="fRM-Sb-ned" id="hNB-Bz-KiR"/>
+                                <segue destination="Itx-td-Bvb" kind="show" id="c02-MW-FNM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="recentWorkoutsTableView" destination="YXB-n6-l5D" id="pWG-Jy-gwM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="omE-fV-zH4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -76,7 +80,7 @@
         <!--Add New Workout-->
         <scene sceneID="o29-GU-xkg">
             <objects>
-                <viewController title="Add New Workout" id="Itx-td-Bvb" sceneMemberID="viewController">
+                <viewController title="Add New Workout" id="Itx-td-Bvb" customClass="NewWorkoutViewController" customModule="Cycle_Trac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8V8-Pr-Igh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -100,10 +104,13 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="bJF-FT-9Gp"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="IqB-fS-Cll">
                             <connections>
-                                <segue destination="4bq-Zm-9DV" kind="show" id="oBs-i1-bF9"/>
+                                <segue destination="4bq-Zm-9DV" kind="show" id="HQE-B0-NS3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="workoutSongs" destination="EHi-p8-1i4" id="bu9-nz-ktL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rUq-2v-sWq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -117,45 +124,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Song Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GwG-x7-TQr">
-                                <rect key="frame" x="137.5" y="88.5" width="100" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Song Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GwG-x7-TQr">
+                                <rect key="frame" x="87.5" y="88.5" width="200" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="dWZ-Sr-RjO"/>
+                                    <constraint firstAttribute="width" constant="200" id="dWZ-Sr-RjO"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uGM-19-3s2">
-                                <rect key="frame" x="27.5" y="135" width="320" height="216"/>
-                            </pickerView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7P6-MV-qay">
-                                <rect key="frame" x="62.5" y="378" width="250" height="200"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Duration" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pkK-re-yNK">
+                                <rect key="frame" x="137.5" y="153" width="100" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="2kX-kN-2Tl"/>
-                                    <constraint firstAttribute="width" constant="250" id="82N-F2-EhF"/>
+                                    <constraint firstAttribute="width" constant="100" id="AI7-9F-uxg"/>
                                 </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="This is the Song Description. " textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bou-Pr-Gh4">
+                                <rect key="frame" x="40" y="233" width="295" height="205"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSD-ji-PSd">
+                                <rect key="frame" x="169.5" y="472" width="36" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="addNewSong:" destination="4bq-Zm-9DV" eventType="touchUpInside" id="KNU-rI-dG3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="GwG-x7-TQr" firstAttribute="top" secondItem="MnC-4b-zv5" secondAttribute="top" constant="24.5" id="22K-dT-7sf"/>
-                            <constraint firstItem="uGM-19-3s2" firstAttribute="top" secondItem="GwG-x7-TQr" secondAttribute="bottom" constant="16.5" id="Ao4-eP-1Pc"/>
-                            <constraint firstItem="7P6-MV-qay" firstAttribute="top" secondItem="uGM-19-3s2" secondAttribute="bottom" constant="27" id="H02-K0-may"/>
-                            <constraint firstItem="uGM-19-3s2" firstAttribute="centerX" secondItem="gyg-BL-y8c" secondAttribute="centerX" id="d7X-iX-KOM"/>
-                            <constraint firstItem="7P6-MV-qay" firstAttribute="centerX" secondItem="gyg-BL-y8c" secondAttribute="centerX" id="jFF-oj-Cxj"/>
-                            <constraint firstItem="MnC-4b-zv5" firstAttribute="bottom" secondItem="7P6-MV-qay" secondAttribute="bottom" constant="40" id="mxZ-xe-uaE"/>
+                            <constraint firstItem="hSD-ji-PSd" firstAttribute="top" secondItem="bou-Pr-Gh4" secondAttribute="bottom" constant="34" id="A2i-LY-lGq"/>
+                            <constraint firstItem="MnC-4b-zv5" firstAttribute="bottom" secondItem="hSD-ji-PSd" secondAttribute="bottom" constant="110" id="AR6-Ak-x1l"/>
+                            <constraint firstItem="MnC-4b-zv5" firstAttribute="trailing" secondItem="bou-Pr-Gh4" secondAttribute="trailing" constant="40" id="JZf-TV-8oN"/>
+                            <constraint firstItem="bou-Pr-Gh4" firstAttribute="leading" secondItem="MnC-4b-zv5" secondAttribute="leading" constant="40" id="Jh0-cJ-0J7"/>
+                            <constraint firstItem="hSD-ji-PSd" firstAttribute="centerX" secondItem="gyg-BL-y8c" secondAttribute="centerX" id="Mjx-pA-O9G"/>
+                            <constraint firstItem="pkK-re-yNK" firstAttribute="centerX" secondItem="gyg-BL-y8c" secondAttribute="centerX" id="TFy-eH-iC7"/>
+                            <constraint firstItem="bou-Pr-Gh4" firstAttribute="top" secondItem="pkK-re-yNK" secondAttribute="bottom" constant="50" id="Vnp-FJ-8dv"/>
+                            <constraint firstItem="bou-Pr-Gh4" firstAttribute="centerX" secondItem="gyg-BL-y8c" secondAttribute="centerX" id="XCW-Kz-cwA"/>
+                            <constraint firstItem="pkK-re-yNK" firstAttribute="top" secondItem="GwG-x7-TQr" secondAttribute="bottom" constant="34.5" id="Z7f-gz-Dze"/>
+                            <constraint firstItem="MnC-4b-zv5" firstAttribute="bottom" secondItem="bou-Pr-Gh4" secondAttribute="bottom" constant="180" id="iL9-MZ-fTP"/>
                             <constraint firstItem="GwG-x7-TQr" firstAttribute="centerX" secondItem="gyg-BL-y8c" secondAttribute="centerX" id="wLU-iy-Ber"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MnC-4b-zv5"/>
                     </view>
                     <connections>
-                        <outlet property="songDescriptionTextView" destination="7P6-MV-qay" id="Iat-4C-nfG"/>
-                        <outlet property="songDurationPickerView" destination="uGM-19-3s2" id="De1-kA-ac8"/>
+                        <outlet property="songDescriptionTextView" destination="bou-Pr-Gh4" id="bMi-Rb-R3s"/>
+                        <outlet property="songDurationTextField" destination="pkK-re-yNK" id="dsX-KM-jrv"/>
                         <outlet property="songTitleTextField" destination="GwG-x7-TQr" id="rk0-71-qHR"/>
                     </connections>
                 </viewController>
