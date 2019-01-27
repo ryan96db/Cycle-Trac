@@ -52,10 +52,17 @@ class NewWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            
         if editingStyle == UITableViewCell.EditingStyle.delete {
+            context.delete(songsCoreData[indexPath.row])
             songsCoreData.remove(at: indexPath.row)
             self.workoutSongs.deleteRows(at: [indexPath], with: .automatic)
+            
         }
+            
+        }
+        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songsCoreData.count
