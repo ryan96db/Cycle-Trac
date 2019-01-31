@@ -8,9 +8,10 @@
     <entity name="Workout" representedClassName="Workout" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="songs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Song" syncable="YES"/>
     </entity>
     <elements>
         <element name="Song" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="Workout" positionX="-63" positionY="9" width="128" height="75"/>
+        <element name="Workout" positionX="-63" positionY="9" width="128" height="90"/>
     </elements>
 </model>

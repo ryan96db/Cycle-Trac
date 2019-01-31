@@ -17,6 +17,7 @@ class NewWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
 
     var songsCoreData = [Song]()
     
+    var workout = Workout()
     
     @IBOutlet weak var workoutSongs: UITableView!
     
@@ -64,6 +65,7 @@ class NewWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songsCoreData.count
     }

@@ -9,15 +9,60 @@
 import UIKit
 
 class RecentWorkoutsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+    
+    @IBOutlet weak var recentWorkouts: UITableView!
+    var recentWorkoutsCoreData = [Workout]()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        recentWorkouts.delegate = self
+        recentWorkouts.dataSource = self
+        
+        getRecentWorkouts()
+        
+        recentWorkouts.reloadData()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        recentWorkouts.delegate = self
+        recentWorkouts.dataSource = self
+        
+        getRecentWorkouts()
+        
+        recentWorkouts.reloadData()
+    }
+    
+    func getRecentWorkouts()
+    {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            
+            if let recentWorkoutsFromCoreData = try?context.fetch(Workout.fetchRequest()) {
+                
+                if let workouts = recentWorkoutsFromCoreData as? [Workout]
+                {
+                    recentWorkoutsCoreData = workouts
+                    
+                    recentWorkouts.reloadData()
+                }
+                
+            }
+        }
+    }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return recentWorkoutsCoreData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
+        let currentWorkout = recentWorkoutsCoreData[indexPath.row]
+        
+        cell.textLabel?.text = currentWorkout.name! + "\t\t\t\t\t\t\t" + currentWorkout.date!
         return cell
     }
-    
     
     @IBAction func createNewWorkout(_ sender: Any) {
         
@@ -44,12 +89,28 @@ class RecentWorkoutsViewController: UIViewController, UITableViewDelegate, UITab
                     {
                         newWorkout.name = name
                         
-                        //                performSegue(withIdentifier: "moveToNewWorkoutViewController", sender: workoutItem)
+                        let day = Date()
+                        let dayFormatter = DateFormatter()
+                        dayFormatter.dateFormat = "EEE"
+                        let dayofWeek = dayFormatter.string(from: day)
+                        
+                        
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateStyle = .medium
+                        
+                        let dateString = "\(dayofWeek), \(dateFormatter.string(from: Date() as Date))"
+                        
+                        newWorkout.date = dateString
+                        
+                        self.performSegue(withIdentifier: "moveToNewWorkoutViewController", sender: newWorkout)
                         
                     }
+                    
+                    (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
 
                 }
             }
+                
             else {
                 let errorAlert = UIAlertController(title: "Error", message: "Please enter a new workout name.", preferredStyle: .alert)
                 errorAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {
@@ -64,15 +125,35 @@ class RecentWorkoutsViewController: UIViewController, UITableViewDelegate, UITab
         self.present(alertController, animated: true)
     }
     
-    @IBOutlet weak var recentWorkoutsTableView: UITableView!
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        recentWorkoutsTableView.delegate = self
-        recentWorkoutsTableView.dataSource = self
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "moveToNewWorkoutViewController"{
+            if let workoutVC = segue.destination as? NewWorkoutViewController
+            {
+                if let selectedWorkout = sender as? Workout {
+                    workoutVC.workout = selectedWorkout
+                    
+                }
+            }
+        }
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            
+            if editingStyle == UITableViewCell.EditingStyle.delete {
+                context.delete(recentWorkoutsCoreData[indexPath.row])
+                recentWorkoutsCoreData.remove(at: indexPath.row)
+                self.recentWorkouts.deleteRows(at: [indexPath], with: .automatic)
+                
+            }
+            
+        }
+        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    }
 
 }
